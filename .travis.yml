@@ -1,0 +1,24 @@
+sudo: required
+language: generic
+dist: xenial
+notifications:
+  email:
+    on_success: change
+    on_failure: always
+    recipients:
+    - ryanewel@amazon.com
+env:
+  matrix:
+  - ROS_DISTRO=kinetic ROS_VERSION=1 GAZEBO_VERSION=7
+  - ROS_DISTRO=kinetic ROS_VERSION=1 GAZEBO_VERSION=9
+  global:
+  - SA_NAME=hello-world
+  - SA_PACKAGE_NAME=hello_world_robot
+  - NO_TEST=true
+  - GH_USER_NAME="travis-ci"
+  - GH_USER_EMAIL="travis@travis-ci.org"
+  - AWS_DEFAULT_REGION=us-west-2
+install:
+- git clone https://github.com/ryanewel/travis-scripts.git .ros_ci
+script:
+- .ros_ci/ce_build.sh
