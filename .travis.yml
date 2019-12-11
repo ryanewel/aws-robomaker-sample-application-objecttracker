@@ -19,7 +19,10 @@ env:
   - GH_USER_EMAIL="travis@travis-ci.org"
   - AWS_DEFAULT_REGION=us-west-2
   - WORKSPACES="simulation_ws"
+  - SOURCE_ONLY_WORKSPACES="robot_ws"
 install:
 - git clone https://github.com/ryanewel/travis-scripts.git .ros_ci
 script:
 - .ros_ci/ce_build.sh
+- ls $TRAVIS_BUILD_DIR/shared/
+- unzip -l $TRAVIS_BUILD_DIR/shared/sources.zip
